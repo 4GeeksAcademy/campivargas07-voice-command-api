@@ -11,10 +11,11 @@
       "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "ms-azuretools.vscode-docker"
+        "ms-azuretools.vscode-docker",
+        "4geeks.4geeks-student"
       ]
     }
   },
   "forwardPorts": [8000, 5173],
-  "postCreateCommand": "python -m pip install --upgrade pip pipenv && cd frontend && npm install"
+  "postCreateCommand": "python -m pip install --upgrade pip uv && uv sync && cd frontend && npm install"
 }

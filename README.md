@@ -78,7 +78,7 @@ voice-command-api/
 |       |-- schemas/         # Request and response contracts
 |       |-- services/        # Your implementation goes here
 |       `-- utils/
-|-- Pipfile
+|-- pyproject.toml
 |-- README.md
 `-- README.es.md
 ```
@@ -119,8 +119,8 @@ Create a `.env` file from `.env.example` and fill in your Groq credentials.
 Install dependencies and run the API:
 
 ```bash
-pipenv install
-pipenv run uvicorn src.main:app --reload
+uv sync
+uv run uvicorn src.main:app --reload
 ```
 
 ### Frontend setup

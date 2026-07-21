@@ -78,7 +78,7 @@ voice-command-api/
 |       |-- schemas/         # Contratos de request y response
 |       |-- services/        # Aqui va tu implementacion
 |       `-- utils/
-|-- Pipfile
+|-- pyproject.toml
 |-- README.md
 `-- README.es.md
 ```
@@ -119,8 +119,8 @@ Crea un archivo `.env` a partir de `.env.example` y agrega tus credenciales de G
 Instala dependencias y ejecuta la API:
 
 ```bash
-pipenv install
-pipenv run uvicorn src.main:app --reload
+uv sync
+uv run uvicorn src.main:app --reload
 ```
 
 ### Configuracion del frontend
