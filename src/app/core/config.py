@@ -11,7 +11,12 @@ class Settings(BaseSettings):
     groq_transcription_model: str = "whisper-large-v3-turbo"
     request_timeout_seconds: float = 45.0
     allowed_origins: Annotated[list[str], NoDecode] = Field(
-        default_factory=lambda: ["http://localhost:5173", "http://127.0.0.1:5173"]
+        default_factory=lambda: [
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "http://localhost:5199",
+            "http://127.0.0.1:5199",
+        ]
     )
 
     model_config = SettingsConfigDict(

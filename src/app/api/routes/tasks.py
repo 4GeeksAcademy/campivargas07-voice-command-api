@@ -1,19 +1,30 @@
 from fastapi import APIRouter, HTTPException, status
 
 from src.app.schemas.voice import Task, TaskCreate, TaskReplace, TaskUpdate
+from src.app.services import task_service
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
 
 @router.get("", response_model=list[Task])
 def get_tasks() -> list[Task]:
-    raise_not_implemented("GET /tasks")
+    return task_service.get_all()
 
 
 @router.post("", response_model=Task, status_code=status.HTTP_201_CREATED)
 def create_task(payload: TaskCreate) -> Task:
-    _ = payload
-    raise_not_implemented("POST /tasks")
+    return task_service.create(payload)
+
+
+@router.get("/{task_id}", response_model=Task)
+def get_task(task_id: int) -> Task:
+    task = task_service.get_by_id(task_id)
+    if task is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Task with id {task_id} not found.",
+        )
+    return task
 
 
 @router.put("/{task_id}", response_model=Task)
@@ -21,8 +32,13 @@ def replace_task(
     task_id: int,
     payload: TaskReplace,
 ) -> Task:
-    _ = (task_id, payload)
-    raise_not_implemented("PUT /tasks/{task_id}")
+    task = task_service.replace(task_id, payload)
+    if task is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Task with id {task_id} not found.",
+        )
+    return task
 
 
 @router.patch("/{task_id}", response_model=Task)
@@ -30,18 +46,21 @@ def update_task(
     task_id: int,
     payload: TaskUpdate,
 ) -> Task:
-    _ = (task_id, payload)
-    raise_not_implemented("PATCH /tasks/{task_id}")
+    task = task_service.update(task_id, payload)
+    if task is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Task with id {task_id} not found.",
+        )
+    return task
 
 
 @router.delete("/{task_id}")
 def delete_task(task_id: int) -> dict[str, str]:
-    _ = task_id
-    raise_not_implemented("DELETE /tasks/{task_id}")
-
-
-def raise_not_implemented(endpoint: str) -> None:
-    raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail=f"Template endpoint pending implementation: {endpoint}",
-    )
+    deleted = task_service.delete(task_id)
+    if not deleted:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Task with id {task_id} not found.",
+        )
+    return {"message": f"Task {task_id} deleted."}

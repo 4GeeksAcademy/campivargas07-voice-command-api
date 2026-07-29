@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from src.app.core.config import get_settings
 from src.app.api.routes.instruction import router as instruction_router
+from src.app.api.routes.logs import router as logs_router
 from src.app.api.routes.tasks import router as tasks_router
 from src.app.api.routes.transcribe import router as transcribe_router
 
@@ -27,6 +28,7 @@ def create_app() -> FastAPI:
     app.include_router(tasks_router)
     app.include_router(instruction_router)
     app.include_router(transcribe_router)
+    app.include_router(logs_router)
     return app
 
 
