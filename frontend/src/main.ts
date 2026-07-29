@@ -50,8 +50,8 @@ const supportsAudioCapture =
 const state: AppState = {
   transcription: '',
   microphoneState: supportsAudioCapture
-    ? 'Press record. Audio stops automatically after 20 seconds.'
-    : 'Audio recording is unavailable in this browser.',
+    ? 'Presiona el botón ▶ para grabar. Se detiene sola a los 20 segundos.'
+    : 'La grabación de audio no está disponible en este navegador.',
   isRecording: false,
   isLoading: false,
   supportsAudioCapture,
@@ -61,8 +61,8 @@ const state: AppState = {
     {
       id: Date.now(),
       role: 'assistant',
-      heading: 'Voice Task Assistant',
-      body: 'Record a command on the right. I will show the transcription the backend heard and the final task API response here.',
+      heading: '🎤 Asistente de Voz',
+      body: '¡Hola! 👋 Graba un comando de voz en el panel de la derecha.\n\n**1.** Haz clic en el botón **▶ Grabar**\n**2.** Habla claramente (ej: *"crea una tarea para comprar pan"*)\n**3.** Espera la respuesta aquí\n\n⏱️ La grabación se detiene sola a los 20 segundos. También puedes escribir un comando manual si falla el micrófono.',
       timestamp: formatTime(),
     },
   ],
@@ -80,10 +80,10 @@ app.innerHTML = `
       <section class="chat-column panel">
         <header class="section-header">
           <div>
-            <span class="section-kicker">Conversation</span>
-            <h1>API chat transcript</h1>
+            <span class="section-kicker">Conversación</span>
+            <h1>Historial de comandos</h1>
           </div>
-          <p>The assistant logs the transcription returned by the backend and the final task response for each command.</p>
+          <p>Aquí verás la transcripción de tu voz y la respuesta de cada tarea ejecutada.</p>
         </header>
         <div id="chat-thread" class="chat-thread"></div>
       </section>
@@ -91,8 +91,8 @@ app.innerHTML = `
       <aside class="voice-column panel">
         <header class="section-header compact">
           <div>
-            <span class="section-kicker">Recorder</span>
-            <h2>20 second voice capture</h2>
+            <span class="section-kicker">Grabador</span>
+            <h2>🎤 Captura de voz</h2>
           </div>
           <p class="status-copy" id="microphone-state"></p>
         </header>
@@ -102,16 +102,15 @@ app.innerHTML = `
             <div class="pulse-core"></div>
           </div>
           <div class="listen-copy">
-            <span class="section-kicker">Live status</span>
+            <span class="section-kicker">Estado</span>
             <h3 id="listening-chip"></h3>
             <p>
-              After two failed recordings, manual transcription unlocks automatically. Speak for several seconds; if the clip
-              is mostly silence, Whisper often guesses short words like “Gracias”.
+              Habla claro durante 2-3 segundos. Si falla 2 veces, se habilita la escritura manual.
             </p>
           </div>
         </div>
 
-        <label class="field-label" for="transcribe-lang">Transcription language (Whisper)</label>
+        <label class="field-label" for="transcribe-lang">Idioma de transcripción</label>
         <select id="transcribe-lang" class="transcribe-lang-select" aria-label="Transcription language">
           <option value="">Auto-detect</option>
           <option value="es">Español</option>
@@ -127,14 +126,14 @@ app.innerHTML = `
         </div>
 
         <section id="manual-fallback" class="manual-panel" hidden>
-          <label class="field-label" for="transcription-input">Manual transcription</label>
+          <label class="field-label" for="transcription-input">Escribe un comando</label>
           <textarea
             id="transcription-input"
             name="transcription-input"
             rows="5"
-            placeholder="Type a command such as: add buy groceries to my list"
+            placeholder='Ej: crea una tarea para comprar pan'
           ></textarea>
-          <button id="run-manual" class="secondary-button" type="button">Send manual transcription</button>
+          <button id="run-manual" class="secondary-button" type="button">Enviar comando</button>
         </section>
       </aside>
     </section>

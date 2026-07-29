@@ -204,4 +204,37 @@ Si la transcripcion esta bien pero la accion sale mal, el problema esta en `/ins
 
 ---
 
+## 🧪 Guía rápida para probar (para profesores)
+
+Una vez que el backend y frontend estén corriendo:
+
+### 1. Abre el frontend
+Ve a `http://localhost:5173` (o el puerto que muestre Vite).
+
+### 2. Graba un comando de voz
+En el panel derecho, **haz clic en el botón ▶ Grabar** y di algo como:
+- *"crea una tarea para comprar pan"*
+- *"lista todas las tareas"*
+- *"marca como completa la tarea 1"*
+- *"elimina la tarea 3"*
+
+La grabación se detiene automáticamente a los 20 segundos.
+
+### 3. Revisa el resultado
+En el panel izquierdo verás:
+- ✅ La transcripción de lo que dijiste
+- ✅ La instrucción que Groq interpretó (`endpoint`, `method`, `params`)
+- ✅ El resultado de la operación en tareas
+
+### 4. Logs persistentes (JSON Lines)
+Cada transcripción se guarda automáticamente en `logs/transcriptions.jsonl`.
+Puedes consultarlas vía API:
+- `GET http://localhost:8000/logs` — Lista de transcripciones (más recientes primero)
+- `GET http://localhost:8000/logs/file-path` — Ruta del archivo físico
+
+### 5. Comandos manuales (si falla el micrófono)
+Si la grabación falla 2 veces, aparece un cuadro de texto donde puedes escribir comandos directamente.
+
+---
+
 Este y muchos otros proyectos son construidos por estudiantes como parte de los [Coding Bootcamps](https://4geeksacademy.com/) de 4Geeks Academy. Encuentra mas acerca de los cursos de [Full-Stack Software Developer](https://4geeksacademy.com/es/programas-de-carrera/desarrollo-full-stack), [Data Science & Machine Learning](https://4geeksacademy.com/en/career-programs/data-science-ml), [Ciberseguridad](https://4geeksacademy.com/es/programas-de-carrera/ciberseguridad) e [Ingeniería de IA](https://4geeksacademy.com/es/programas-de-carrera/ingenieria-ia).

@@ -204,4 +204,37 @@ If the transcription is correct but the action is wrong, the problem is in `/ins
 
 ---
 
+## 🧪 Quick testing guide (for reviewers)
+
+Once the backend and frontend are running:
+
+### 1. Open the frontend
+Go to `http://localhost:5173` (or the port shown by Vite).
+
+### 2. Record a voice command
+On the right panel, **click the ▶ Record button** and say something like:
+- *"crea una tarea para comprar pan"* (create a task to buy bread)
+- *"lista todas las tareas"* (list all tasks)
+- *"marca como completa la tarea 1"* (mark task 1 as done)
+- *"elimina la tarea 3"* (delete task 3)
+
+Recording stops automatically after 20 seconds.
+
+### 3. Check the result
+The left panel shows:
+- ✅ The transcription of what you said
+- ✅ The instruction Groq interpreted (`endpoint`, `method`, `params`)
+- ✅ The result of the task operation
+
+### 4. Persistent logs (JSON Lines)
+Every transcription is automatically saved to `logs/transcriptions.jsonl`.
+You can view them via API:
+- `GET http://localhost:8000/logs` — Transcription list (newest first)
+- `GET http://localhost:8000/logs/file-path` — Physical file path
+
+### 5. Manual commands (if microphone fails)
+After 2 recording failures, a text field appears where you can type commands directly.
+
+---
+
 This and many other projects are built by students as part of the [Coding Bootcamps](https://4geeksacademy.com/) at 4Geeks Academy. Learn more about the [Full-Stack Software Developer](https://4geeksacademy.com/en/career-programs/full-stack), [Data Science & Machine Learning](https://4geeksacademy.com/en/career-programs/data-science-ml), [Cybersecurity](https://4geeksacademy.com/en/career-programs/cybersecurity), and [AI Engineering](https://4geeksacademy.com/en/career-programs/ai-engineering) programs.

@@ -162,3 +162,6 @@ INFO:     Application startup complete.
 INFO:     127.0.0.1:39174 - "POST /transcribe HTTP/1.1" 200 OK
 INFO:     127.0.0.1:50080 - "OPTIONS /transcribe HTTP/1.1" 200 OK
 INFO:     127.0.0.1:50080 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47866 - "GET /logs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58734 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49754 - "POST /transcribe HTTP/1.1" 200 OK
